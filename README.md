@@ -43,3 +43,22 @@ make[2]: *** No rule to make target '/usr/lib/librt.so/usr/lib/libm.sodl/usr/lib
 make[1]: *** [CMakeFiles/Makefile2:68: CMakeFiles/main.dir/all] Error 2
 make: *** [Makefile:84: all] Error 2
 ```
+
+### Investigation
+
+The problem seems to be with `gflw3Target.cmake:12`
+
+glfw from source
+```
+set_target_properties(glfw PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
+  INTERFACE_LINK_LIBRARIES "/usr/lib/librt.so;/usr/lib/libm.so;dl;/usr/lib/libX11.so;-lpthread;/usr/lib/libXrandr.so;/usr/lib/libXinerama.so;/usr/lib/libXxf86vm.so;/usr/lib/libXcursor.so"
+)
+```
+vcpkg glfw
+```
+set_target_properties(glfw PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
+  INTERFACE_LINK_LIBRARIES "/usr/lib/librt.so/usr/lib/libm.sodl/usr/lib/libX11.so-lpthread/usr/lib/libXrandr.so/usr/lib/libXinerama.so/usr/lib/libXxf86vm.so/usr/lib/libXcursor.so"
+)
+```
