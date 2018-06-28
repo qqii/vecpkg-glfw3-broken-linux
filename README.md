@@ -44,7 +44,7 @@ make[1]: *** [CMakeFiles/Makefile2:68: CMakeFiles/main.dir/all] Error 2
 make: *** [Makefile:84: all] Error 2
 ```
 
-### Investigation
+## Investigation
 
 The problem seems to be with `gflw3Target.cmake:12`
 
@@ -61,4 +61,20 @@ set_target_properties(glfw PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
   INTERFACE_LINK_LIBRARIES "/usr/lib/librt.so/usr/lib/libm.sodl/usr/lib/libX11.so-lpthread/usr/lib/libXrandr.so/usr/lib/libXinerama.so/usr/lib/libXxf86vm.so/usr/lib/libXcursor.so"
 )
+```
+
+This is due to `glfw3/portfile.cmake:46`
+```
+file(READ ${CURRENT_PACKAGES_DIR}/share/glfw3/glfw3Targets.cmake _contents)
+set(pattern "get_filename_component(_IMPORT_PREFIX \"\${_IMPORT_PREFIX}\" PATH)\n")
+string(REPLACE "${pattern}${pattern}${pattern}" "${pattern}${pattern}" _contents "${_contents}")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/glfw3/glfw3Targets.cmake ${_contents}) # without quotes this strips the semicolons
+```
+Without quoting `${_contents}` the semicolons in the list are stripped, so this is easily fixed by adding semicolons:
+
+```
+file(READ ${CURRENT_PACKAGES_DIR}/share/glfw3/glfw3Targets.cmake _contents)
+set(pattern "get_filename_component(_IMPORT_PREFIX \"\${_IMPORT_PREFIX}\" PATH)\n")
+string(REPLACE "${pattern}${pattern}${pattern}" "${pattern}${pattern}" _contents "${_contents}")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/glfw3/glfw3Targets.cmake "${_contents}")
 ```
