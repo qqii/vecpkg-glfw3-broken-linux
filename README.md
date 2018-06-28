@@ -5,7 +5,7 @@
 1. Install [vcpkg](https://github.com/Microsoft/vcpkg) by following the instructions.
 1. `vcpkg install glfw3`
 1. `cd build`
-1. `cmake .. "-DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake]"`
+1. `cmake .. "-DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake"`
 1. `make`
 
 ## Versions Used
@@ -16,7 +16,7 @@
 ## Output Produced
 
 ```
-$ cmake .. "-DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake]"
+$ cmake .. "-DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake"
 -- The C compiler identification is GNU 8.1.0
 -- The CXX compiler identification is GNU 8.1.0
 -- Check for working C compiler: /usr/bin/cc
