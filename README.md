@@ -1,5 +1,7 @@
 # Example repository for vcpkg-glfw3 failing to compile on linux
 
+Relevent Pull Request: https://github.com/Microsoft/vcpkg/pull/3803
+
 ## Setup
 
 1. Install [vcpkg](https://github.com/Microsoft/vcpkg) by following the instructions.
