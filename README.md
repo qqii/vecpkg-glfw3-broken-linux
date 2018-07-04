@@ -1,6 +1,8 @@
-# Example repository for vcpkg-glfw3 failing to compile on linux
+# This issue is fixed by the merged pull request
 
-Relevent Pull Request: https://github.com/Microsoft/vcpkg/pull/3803
+## Example repository for vcpkg-glfw3 failing to compile on linux
+
+Merged pull request: https://github.com/Microsoft/vcpkg/pull/3803
 
 ## Setup
 
